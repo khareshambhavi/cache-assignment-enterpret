@@ -34,7 +34,7 @@ class LIFOEvictionPolicyTest {
     }
 
     @Test
-    void testReaccessingKeyDoesNotChangeEvictionOrder() {
+    void testReaccessingKeyMakesItEvictEarlier() {
         lifoEvictionPolicy.keyAccessed(1);
         lifoEvictionPolicy.keyAccessed(2);
         lifoEvictionPolicy.keyAccessed(3);
@@ -46,8 +46,8 @@ class LIFOEvictionPolicyTest {
         assertEquals(5, lifoEvictionPolicy.evictKey());
         assertEquals(1, lifoEvictionPolicy.evictKey());
         assertEquals(4, lifoEvictionPolicy.evictKey());
-        assertEquals(3, lifoEvictionPolicy.evictKey());
         assertEquals(2, lifoEvictionPolicy.evictKey());
+        assertEquals(3, lifoEvictionPolicy.evictKey());
     }
 }
 

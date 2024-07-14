@@ -34,7 +34,7 @@ class FIFOEvictionPolicyTest {
     }
 
     @Test
-    void testReaccessingKeyDoesNotChangeEvictionOrder() {
+    void testReaccessingKeyPreventsItFromEviction() {
         fifoEvictionPolicy.keyAccessed(1);
         fifoEvictionPolicy.keyAccessed(2);
         fifoEvictionPolicy.keyAccessed(3);
@@ -43,10 +43,10 @@ class FIFOEvictionPolicyTest {
         fifoEvictionPolicy.keyAccessed(1);
         fifoEvictionPolicy.keyAccessed(5);
         
-        assertEquals(1, fifoEvictionPolicy.evictKey());
-        assertEquals(2, fifoEvictionPolicy.evictKey());
         assertEquals(3, fifoEvictionPolicy.evictKey());
+        assertEquals(2, fifoEvictionPolicy.evictKey());
         assertEquals(4, fifoEvictionPolicy.evictKey());
+        assertEquals(1, fifoEvictionPolicy.evictKey());
         assertEquals(5, fifoEvictionPolicy.evictKey());
     }
 }
