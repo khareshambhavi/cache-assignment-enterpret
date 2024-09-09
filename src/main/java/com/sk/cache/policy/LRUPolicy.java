@@ -3,6 +3,7 @@ package com.sk.cache.policy;
 import com.sk.dsa.LinkedList;
 import com.sk.dsa.LinkedListNode;
 
+import java.security.Key;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -42,5 +43,10 @@ public class LRUPolicy<Key> implements EvictionPolicy<Key> {
             dll.detachNode(first);
         }
         return first.getElement();
+    }
+
+    @Override
+    public boolean isGetOperationConsideredAsAccessedKey() {
+        return true; // LRU considers get operation as key access
     }
 }

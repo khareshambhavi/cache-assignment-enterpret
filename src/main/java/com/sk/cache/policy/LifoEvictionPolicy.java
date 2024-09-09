@@ -1,5 +1,6 @@
 package com.sk.cache.policy;
 
+import java.security.Key;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class LifoEvictionPolicy<Key> implements EvictionPolicy<Key> {
@@ -18,6 +19,11 @@ public class LifoEvictionPolicy<Key> implements EvictionPolicy<Key> {
     @Override
     public synchronized Key evictKey() {
         return stack.pollFirst();
+    }
+
+    @Override
+    public boolean isGetOperationConsideredAsAccessedKey() {
+        return false; 
     }
 }
 

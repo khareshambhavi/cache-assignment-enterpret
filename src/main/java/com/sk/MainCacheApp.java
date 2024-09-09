@@ -24,7 +24,7 @@ public class MainCacheApp {
         scanner.nextLine(); 
 
         EvictionPolicy<String> evictionPolicy = null;
-        boolean isGetOperationConsideredAsAccessedKey = false;
+       
 
         switch (policyChoice) {
             case 1:
@@ -35,7 +35,7 @@ public class MainCacheApp {
                 break;
             case 3:
                 evictionPolicy = new LRUPolicy<>();
-                isGetOperationConsideredAsAccessedKey = true;
+                
                 break;
             default:
                 System.out.println("Invalid choice. Exiting.");
@@ -49,7 +49,7 @@ public class MainCacheApp {
         Storage<String, String> storage = new ConcurrentHashMapStorage<>(capacity);
 
         // Create cache with chosen policy and storage
-        Cache<String, String> cache = new Cache<>(evictionPolicy, storage, isGetOperationConsideredAsAccessedKey);
+        Cache<String, String> cache = new Cache<>(evictionPolicy, storage);
 
         // Perform operations on the cache
         boolean continueExecution = true;
@@ -94,7 +94,3 @@ public class MainCacheApp {
         scanner.close();
     }
 }
-
-
-
-

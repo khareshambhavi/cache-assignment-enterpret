@@ -8,12 +8,10 @@ import com.sk.cache.storage.Storage;
 public class Cache<Key, Value> {
     private final EvictionPolicy<Key> evictionPolicy;
     private final Storage<Key, Value> storage;
-    private final boolean isGetOperationConsideredAsAccessedKey;
 
-    public Cache(EvictionPolicy<Key> evictionPolicy, Storage<Key, Value> storage, boolean isGetOperationConsideredAsAccessedKey) {
+    public Cache(EvictionPolicy<Key> evictionPolicy, Storage<Key, Value> storage) {
         this.evictionPolicy = evictionPolicy;
         this.storage = storage;
-        this.isGetOperationConsideredAsAccessedKey = isGetOperationConsideredAsAccessedKey;
     }
 
     public void put(Key key, Value value) {
@@ -35,14 +33,13 @@ public class Cache<Key, Value> {
     public Value get(Key key) {
         try {
             Value value = this.storage.get(key);
-            if (isGetOperationConsideredAsAccessedKey)
-            this.evictionPolicy.keyAccessed(key);
+            if (evictionPolicy.isGetOperationConsideredAsAccessedKey()) {
+                this.evictionPolicy.keyAccessed(key);
+            }
             return value;
         } catch (NotFoundException notFoundException) {
             System.out.println("Tried to get a non-existing key.");
             return null;
         }
     }
-
-
 }
