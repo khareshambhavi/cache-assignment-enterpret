@@ -45,3 +45,61 @@ To use the In Memory Cache Library in your Java project, follow these steps:
 4. **Customization**: Implement custom eviction policies by extending EvictionPolicy interface and injecting them into the Cache constructor.
 
 5. **Testing**: Run unit tests provided in the src/test directory or create your own tests to ensure proper functionality.
+
+## Running the MainCacheApp
+The MainCacheApp class provides an interactive command-line interface to demonstrate the usage of the In Memory Cache Library with different eviction policies and cache capacities.
+
+**Steps to Run** :
+
+1. **Compile** : Compile the MainCacheApp.java file using the Java compiler.
+```
+javac MainCacheApp.java
+```
+
+2. **Run** : Execute the compiled class file.
+```
+java MainCacheApp
+```
+3. **Interactive Menu**: Follow the prompts to choose an eviction policy (FIFO, LIFO, or LRU), set the cache capacity, and perform cache operations such as adding key-value pairs and retrieving values.
+
+Example session:
+
+```
+Choose eviction policy:
+1. FIFO (First In First Out)
+2. LIFO (Last In First Out)
+3. LRU (Least Recently Used)
+Enter your choice: 1
+
+Enter cache capacity: 3
+
+Choose operation:
+1. Put key-value pair
+2. Get value for key
+3. Exit
+Enter your choice: 1
+
+Enter key: key1
+Enter value: value1
+Key-value pair added to cache.
+
+Choose operation:
+1. Put key-value pair
+2. Get value for key
+3. Exit
+Enter your choice: 2
+
+Enter key to get value: key1
+Value for key 'key1': value1
+
+Choose operation:
+1. Put key-value pair
+2. Get value for key
+3. Exit
+Enter your choice: 3
+
+Exiting cache application.
+
+```
+
+Adjust the operations and inputs as needed to explore different scenarios and functionalities of the In Memory Cache Library.
